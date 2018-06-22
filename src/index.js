@@ -1,8 +1,9 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom';
+import 'jquery/src/jquery';
+import 'font-awesome/css/font-awesome.min.css';
+import 'bootstrap/dist/js/bootstrap.min.js';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './assets/main.css';
+import routes from './routes'
 
-const Index = () => {
-  return <div>Hello React!</div>;
-};
-
-ReactDOM.render(<Index />, document.getElementById("index"));
+ReactDOM.render(routes, document.getElementById('index'));
