@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "npm run build-prod && npm run start-prod",
     "start-dev": "webpack-dev-server --mode development --open",
     "start-prod": "node ./server.js",
     "build-dev": "webpack --mode development",
