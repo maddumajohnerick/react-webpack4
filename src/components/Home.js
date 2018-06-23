@@ -6,7 +6,9 @@ class Home extends Component {
   componentWillMount() {
     const { artsActions, arts } = this.props;
     
-    artsActions.getArts();
+    if(!arts){
+      artsActions.getArts();
+    }
   }
 
   render() {

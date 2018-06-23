@@ -37,7 +37,6 @@ export function getArt(id) {
     .then(function(response) {
       const byIds = _.mapKeys(response.data, '_id');
       const resObj = {
-        allIds: Object.keys(byIds),
         byIds,
       };
 

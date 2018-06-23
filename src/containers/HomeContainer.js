@@ -5,7 +5,7 @@ import * as artsActions from '../actions/artsActions';
 
 function mapStateToProps(state) {
   return {
-    arts: state.arts.allIds,
+    arts: state.arts.allIds || null,
   };
 }
 
