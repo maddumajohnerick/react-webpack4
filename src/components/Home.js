@@ -4,8 +4,8 @@ import Art from '../containers/ArtContainer'
 
 class Home extends Component {
   componentWillMount() {
-    const { artsActions } = this.props;
-
+    const { artsActions, arts } = this.props;
+    
     artsActions.getArts();
   }
 
