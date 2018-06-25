@@ -5,7 +5,7 @@ import $ from 'jquery';
 class Art extends Component {
   likeArt(event) {
     event.preventDefault();
-
+    
     const { artsActions, art } = this.props;
     art.liked = !art.liked;
 
@@ -30,7 +30,7 @@ class Art extends Component {
                 <div className="text-holder">
                   {art.title}
                 </div>
-                <div className={`like-holder ${art.liked ? 'liked' : ''}`} onClick={this.likeArt.bind(this)}>
+                <div className={`like-holder ${art.liked ? 'liked' : ''}`} onClick={(e) => this.likeArt(e)}>
                   <i className="fa fa-heart" aria-hidden="true"></i>
                 </div>
               </div>
