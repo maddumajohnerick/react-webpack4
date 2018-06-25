@@ -18,8 +18,9 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
+        loader: "babel-loader",
+        options: {
+          plugins: ['transform-class-properties']
         }
       },
       {
@@ -28,15 +29,11 @@ module.exports = {
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: {
-          loader: "url-loader?limit=10000&mimetype=application/font-woff"
-        } 
+        loader: "url-loader?limit=10000&mimetype=application/font-woff"
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: {
-          loader: "file-loader"
-        } 
+        loader: "file-loader"
       }
     ]
   },
