@@ -2,22 +2,12 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 class ArtView extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const { artsActions, art, artId } = this.props;
 
     if (!art) {
       artsActions.getArt(artId);
     }
-  }
-
-  componentDidMount() {
-    this.interval = setInterval(() => {
-      this.forceUpdate();
-    }, 500);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
   }
 
   render() {

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Art from '../containers/ArtContainer'
 
 class Home extends Component {
-  componentWillMount() {
+  componentDidMount() {
     const { artsActions, arts } = this.props;
     
     if(!arts){
