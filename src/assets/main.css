@@ -1,11 +1,11 @@
 body{
   background-color: #E0E0E0;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 2rem;
+/*  font-size: 1.2rem;*/
 }
 
 h1{
-  font-size: 4rem;
+  margin-top: 20px;
 }
 
 .site-header{

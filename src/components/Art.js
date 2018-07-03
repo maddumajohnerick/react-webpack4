@@ -22,8 +22,8 @@ class Art extends Component {
     let { art } = this.props;
 
     return (
-      <Link to={`/view/${art._id}`}>
-        <div className="col-md-3" id={art._id}>
+      <Link to={`/view/${art._id}`} className="col-md-3">
+        <div id={art._id}>
           <div className="col-md-12 art-container">
             <div className="image-container" style={{ backgroundImage: `url(${art ? art.src : ''})`}}>
               <div className="info-container">
