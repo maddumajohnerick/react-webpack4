@@ -9,7 +9,7 @@
     "start-dev": "concurrently --kill-others \"webpack-dev-server --mode development --open\" \"node ./server.js\"",
     "start-prod": "set NODE_ENV=production&& node ./server.js",
     "build-dev": "webpack --mode development",
-    "heroku-postbuild": "webpack --mode production" // previously build-prod
+    "heroku-postbuild": "webpack --mode production"
   },
   "author": "",
   "license": "ISC",
