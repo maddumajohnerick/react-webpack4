@@ -5,11 +5,11 @@
   "main": "index.js",
   "proxy": "http://localhost:5000/",
   "scripts": {
-    "start": "npm run build-prod && npm run start-prod",
+    "start": "npm run start-prod",
     "start-dev": "concurrently --kill-others \"webpack-dev-server --mode development --open\" \"node ./server.js\"",
     "start-prod": "set NODE_ENV=production&& node ./server.js",
     "build-dev": "webpack --mode development",
-    "build-prod": "webpack --mode production"
+    "heroku-prebuild": "webpack --mode production" // previously build-prod
   },
   "author": "",
   "license": "ISC",
