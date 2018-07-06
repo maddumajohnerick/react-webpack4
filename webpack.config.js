@@ -8,7 +8,7 @@ const htmlWebpackPlugin = new HtmlWebPackPlugin({
 });
 
 module.exports = {
-  entry: './src/index.js',
+  entry: ['babel-polyfill', './src/index.js'],
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'index_bundle.js',
@@ -81,6 +81,7 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
+    proxy: { '/api/**': { target: 'http://localhost:3000/', secure: false, logLevel: 'debug' } }
   },
   plugins: [
     htmlWebpackPlugin,

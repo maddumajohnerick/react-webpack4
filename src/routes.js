@@ -7,6 +7,7 @@ import configureStore from './store/configureStore';
 import App from './components/App';
 import Home from './containers/HomeContainer';
 import ArtView from './containers/ArtViewContainer';
+import NotFound from './components/NotFound';
 
 const store = configureStore();
 const history = createBrowserHistory()
@@ -19,6 +20,8 @@ export default (
           <Route exact path="/" component={Home} />
           <Route exact path="/home" component={Home} />
           <Route exact path="/view/:artId" component={ArtView} />
+          <Route exact path="/view/:artId" component={ArtView} />
+          <Route component={NotFound} />
         </Switch>
       </Router>
     </App>
