@@ -22,32 +22,23 @@ class DynamicImport extends React.Component {
       })
   }
   render() {
-    return this.props.children(this.state.component)
+    if (this.state.component) {
+      return <this.state.component {...this.props.compProps}/>;
+    }
+    return (<h2>Loading..</h2>);
   }
 }
 
 const Home = (props) => (
-  <DynamicImport load={() => import(/* webpackChunkName: 'home' */ './containers/HomeContainer')}>
-    {(Component) => Component === null
-      ? <h2>Loading..</h2>
-      : <Component {...props} />}
-  </DynamicImport>
+  <DynamicImport load={() => import(/* webpackChunkName: 'home' */ './containers/HomeContainer')} compProps={props}/>
 )
 
 const ArtView = (props) => (
-  <DynamicImport load={() => import(/* webpackChunkName: 'art-view' */ './containers/ArtViewContainer')}>
-    {(Component) => Component === null
-      ? <h2>Loading..</h2>
-      : <Component {...props} />}
-  </DynamicImport>
+  <DynamicImport load={() => import(/* webpackChunkName: 'art-view' */ './containers/ArtViewContainer')} compProps={props}/>
 )
 
 const NotFound = (props) => (
-  <DynamicImport load={() => import(/* webpackChunkName: 'not-found' */  './components/NotFound')}>
-    {(Component) => Component === null
-      ? <h2>Loading..</h2>
-      : <Component {...props} />}
-  </DynamicImport>
+  <DynamicImport load={() => import(/* webpackChunkName: 'not-found' */  './components/NotFound')} compProps={props}/>
 )
 
 export default (
