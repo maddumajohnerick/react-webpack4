@@ -22,10 +22,14 @@ class DynamicImport extends React.Component {
       })
   }
   render() {
-    if (this.state.component) {
-      return <this.state.component {...this.props.compProps}/>;
+    const { compProps, loader } = this.props;
+    const { component } = this.state;
+    const Component = component
+
+    if (Component) {
+      return <Component {...compProps}/>;
     }
-    return (<h2>Loading..</h2>);
+    return (loader ? loader : <h2>Loading..</h2>);
   }
 }
 
