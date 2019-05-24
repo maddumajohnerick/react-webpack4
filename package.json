@@ -9,7 +9,9 @@
     "start-dev": "concurrently --kill-others \"webpack-dev-server --mode development --open\" \"node ./server.js\"",
     "start-prod": "set NODE_ENV=production&& node ./server.js",
     "build-dev": "webpack --mode development",
-    "heroku-postbuild": "webpack --mode production"
+    "heroku-postbuild": "webpack --mode production",
+    "generate-report": "webpack --profile --json > stats.json",
+    "bundle-report": "webpack-bundle-analyzer --port 4200 dist/stats.json"
   },
   "author": "",
   "license": "ISC",
@@ -32,6 +34,7 @@
     "style-loader": "0.21.0",
     "url-loader": "1.0.1",
     "webpack": "4.12.0",
+    "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "3.0.8",
     "webpack-dev-server": "3.1.4"
   },

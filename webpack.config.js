@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const htmlWebpackPlugin = new HtmlWebPackPlugin({
   template: './src/index.html',
@@ -105,6 +106,11 @@ module.exports = {
       Tab: 'exports-loader?Tab!bootstrap/js/dist/tab',
       Tooltip: 'exports-loader?Tooltip!bootstrap/js/dist/tooltip',
       Util: 'exports-loader?Util!bootstrap/js/dist/util'
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'disabled',
+      generateStatsFile: true,
+      statsOptions: { source: false }
     })
   ]
 };
