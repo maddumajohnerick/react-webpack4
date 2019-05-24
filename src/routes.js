@@ -5,12 +5,53 @@ import createBrowserHistory from 'history/createBrowserHistory'
 import configureStore from './store/configureStore';
 
 import App from './components/App';
-import Home from './containers/HomeContainer';
-import ArtView from './containers/ArtViewContainer';
-import NotFound from './components/NotFound';
+// import Home from './containers/HomeContainer';
+// import ArtView from './containers/ArtViewContainer';
+// import NotFound from './components/NotFound';
 
 const store = configureStore();
 const history = createBrowserHistory()
+
+class DynamicImport extends React.Component {
+  state = {
+    component: null
+  }
+  componentDidMount () {
+    this.props.load()
+      .then((component) => {
+        this.setState(() => ({
+          component: component.default ? component.default : component
+        }))
+      })
+  }
+  render() {
+    return this.props.children(this.state.component)
+  }
+}
+
+const Home = (props) => (
+  <DynamicImport load={() => import('./containers/HomeContainer')}>
+    {(Component) => Component === null
+      ? <p>Loading</p>
+      : <Component {...props} />}
+  </DynamicImport>
+)
+
+const ArtView = (props) => (
+  <DynamicImport load={() => import('./containers/ArtViewContainer')}>
+    {(Component) => Component === null
+      ? <p>Loading</p>
+      : <Component {...props} />}
+  </DynamicImport>
+)
+
+const NotFound = (props) => (
+  <DynamicImport load={() => import('./components/NotFound')}>
+    {(Component) => Component === null
+      ? <p>Loading</p>
+      : <Component {...props} />}
+  </DynamicImport>
+)
 
 export default (
   <Provider store={store}>
@@ -19,7 +60,6 @@ export default (
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/home" component={Home} />
-          <Route exact path="/view/:artId" component={ArtView} />
           <Route exact path="/view/:artId" component={ArtView} />
           <Route component={NotFound} />
         </Switch>
