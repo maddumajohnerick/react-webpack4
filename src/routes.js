@@ -5,9 +5,6 @@ import createBrowserHistory from 'history/createBrowserHistory'
 import configureStore from './store/configureStore';
 
 import App from './components/App';
-// import Home from './containers/HomeContainer';
-// import ArtView from './containers/ArtViewContainer';
-// import NotFound from './components/NotFound';
 
 const store = configureStore();
 const history = createBrowserHistory()
@@ -30,7 +27,7 @@ class DynamicImport extends React.Component {
 }
 
 const Home = (props) => (
-  <DynamicImport load={() => import('./containers/HomeContainer')}>
+  <DynamicImport load={() => import(/* webpackChunkName: 'home' */ './containers/HomeContainer')}>
     {(Component) => Component === null
       ? <p>Loading</p>
       : <Component {...props} />}
@@ -38,7 +35,7 @@ const Home = (props) => (
 )
 
 const ArtView = (props) => (
-  <DynamicImport load={() => import('./containers/ArtViewContainer')}>
+  <DynamicImport load={() => import(/* webpackChunkName: 'art-view' */ './containers/ArtViewContainer')}>
     {(Component) => Component === null
       ? <p>Loading</p>
       : <Component {...props} />}
@@ -46,7 +43,7 @@ const ArtView = (props) => (
 )
 
 const NotFound = (props) => (
-  <DynamicImport load={() => import('./components/NotFound')}>
+  <DynamicImport load={() => import(/* webpackChunkName: 'not-found' */  './components/NotFound')}>
     {(Component) => Component === null
       ? <p>Loading</p>
       : <Component {...props} />}
