@@ -29,7 +29,7 @@ class DynamicImport extends React.Component {
 const Home = (props) => (
   <DynamicImport load={() => import(/* webpackChunkName: 'home' */ './containers/HomeContainer')}>
     {(Component) => Component === null
-      ? <p>Loading</p>
+      ? <h2>Loading..</h2>
       : <Component {...props} />}
   </DynamicImport>
 )
@@ -37,7 +37,7 @@ const Home = (props) => (
 const ArtView = (props) => (
   <DynamicImport load={() => import(/* webpackChunkName: 'art-view' */ './containers/ArtViewContainer')}>
     {(Component) => Component === null
-      ? <p>Loading</p>
+      ? <h2>Loading..</h2>
       : <Component {...props} />}
   </DynamicImport>
 )
@@ -45,7 +45,7 @@ const ArtView = (props) => (
 const NotFound = (props) => (
   <DynamicImport load={() => import(/* webpackChunkName: 'not-found' */  './components/NotFound')}>
     {(Component) => Component === null
-      ? <p>Loading</p>
+      ? <h2>Loading..</h2>
       : <Component {...props} />}
   </DynamicImport>
 )

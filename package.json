@@ -6,11 +6,12 @@
   "proxy": "http://localhost:5000/",
   "scripts": {
     "start": "npm run start-prod",
-    "start-dev": "concurrently --kill-others \"webpack-dev-server --mode development --open\" \"node ./server.js\"",
+    "start-dev": "concurrently --kill-others \"webpack-dev-server --config webpack.dev.js --open\" \"node ./server.js\"",
     "start-prod": "set NODE_ENV=production&& node ./server.js",
-    "build-dev": "webpack --mode development",
-    "heroku-postbuild": "webpack --mode production",
-    "generate-report": "webpack --profile --json > stats.json",
+    "build-dev": "webpack --config webpack.dev.js",
+    "heroku-postbuild": "webpack --config webpack.prod.js",
+    "analyze-dev": "webpack --config webpack.dev.js --profile --json > stats.json",
+    "analyze-prod": "webpack --config webpack.prod.js --profile --json > stats.json",
     "bundle-report": "webpack-bundle-analyzer --port 4200 dist/stats.json"
   },
   "author": "",
@@ -33,11 +34,13 @@
     "postcss-loader": "2.1.5",
     "sass-loader": "7.0.3",
     "style-loader": "0.21.0",
+    "uglifyjs-webpack-plugin": "^2.1.3",
     "url-loader": "1.0.1",
     "webpack": "4.12.0",
     "webpack-bundle-analyzer": "^3.3.2",
     "webpack-cli": "3.0.8",
-    "webpack-dev-server": "3.1.4"
+    "webpack-dev-server": "3.1.4",
+    "webpack-merge": "^4.2.1"
   },
   "dependencies": {
     "autoprefixer": "8.6.4",
