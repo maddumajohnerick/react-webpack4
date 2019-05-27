@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React from 'react';
 import { Provider } from 'react-redux';
 import { Switch ,Router, Route } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory'
@@ -9,32 +9,52 @@ import App from './components/App';
 const store = configureStore();
 const history = createBrowserHistory()
 
-const Home = (lazy(() => import(/* webpackChunkName: 'home' */ './containers/HomeContainer')))
+class DynamicImport extends React.Component {
+  state = {
+    component: null
+  }
+  componentDidMount () {
+    this.props.load()
+      .then((component) => {
+        this.setState(() => ({
+          component: component.default ? component.default : component
+        }))
+      })
+  }
+  render() {
+    const { compProps, loader } = this.props;
+    const { component } = this.state;
+    const Component = component
 
-const ArtView = (lazy(() => import(/* webpackChunkName: 'art-view' */ './containers/ArtViewContainer')))
+    if (Component) {
+      return <Component {...compProps}/>;
+    }
+    return (loader ? loader : <h2>Loading..</h2>);
+  }
+}
 
-const NotFound = (lazy(() => import(/* webpackChunkName: 'not-found' */  './components/NotFound')))
+const Home = (props) => (
+  <DynamicImport load={() => import(/* webpackChunkName: 'home' */ './containers/HomeContainer')} compProps={props}/>
+)
+
+const ArtView = (props) => (
+  <DynamicImport load={() => import(/* webpackChunkName: 'art-view' */ './containers/ArtViewContainer')} compProps={props}/>
+)
+
+const NotFound = (props) => (
+  <DynamicImport load={() => import(/* webpackChunkName: 'not-found' */  './components/NotFound')} compProps={props}/>
+)
 
 export default (
   <Provider store={store}>
     <App>
       <Router history={history}>
-        <Suspense fallback={<h2>Loading..</h2>}>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route exact path="/home">
-              <Home />
-            </Route>
-            <Route exact path="/view/:artId">
-              <ArtView />
-            </Route>
-            <Route>
-              <NotFound />
-            </Route>
-          </Switch>
-        </Suspense>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/view/:artId" component={ArtView} />
+          <Route component={NotFound} />
+        </Switch>
       </Router>
     </App>
   </Provider>
