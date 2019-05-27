@@ -16,4 +16,11 @@ if(process.env.NODE_ENV == 'production') {
   });
 }
 
-app.listen(port);
+app.listen(port, err => {
+  if (err) {
+    console.log(err)
+    throw err
+  }
+  console.log('> ENV:', process.env.NODE_ENV)
+  console.log(`> Ready on http://localhost:${port}`)
+});
